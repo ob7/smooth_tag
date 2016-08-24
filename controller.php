@@ -31,7 +31,7 @@ class Controller extends Package
         $sp = Page::getByPath('/dashboard/smooth_tag');
         if(!is_object($sp) || $sp->isError()) {
             $sp = SinglePage::add('/dashboard/smooth_tag', $pkg);
-            $sp->update(array('cName'=>t('Smooth Tag'), 'cDescription'=>'Adds smooth scrolling to a href tag links on the same page')); // this is displayed in the package overview after being installed, and the cName is used for the single pages view as long as it has a view function
+            $sp->update(array('cName'=>t('Smooth Tag'), 'cDescription'=>'Adds smooth scrolling to a href tag links on the same page')); // this is displayed in the package overview after being installed, and the cName is used for the single pages view as long as the page controller has a view function
         }
         $sp = Page::getByPath('/dashboard/smooth_tag/settings');
         if(!is_object($sp) || $sp->isError()) {
