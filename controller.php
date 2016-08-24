@@ -2,8 +2,8 @@
 
 namespace Concrete\Package\SmoothTag;
 use Package;
-use SinglePage;
 use Page;
+use \Concrete\Core\Page\Single as SinglePage; //documentation.concrete5.org/developers/working-with-pages/single-pages/including-single-pages-and-controllers-in-packages
 
 defined('C5_EXECUTE') or die(_("Access Denied."));
 
