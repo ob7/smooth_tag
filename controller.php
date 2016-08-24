@@ -28,10 +28,15 @@ class Controller extends Package
     {
         $pkg = parent::install();
 
-        $sp = Page::getByPath('/dashboard/scroll_tag');
+        $sp = Page::getByPath('/dashboard/smooth_tag');
         if(!is_object($sp) || $sp->isError()) {
-            $sp = SinglePage::add('/dashboard/scroll_tag', $pkg);
-            $sp->update(array('cName'=>t('Scroll Tag Settings'), 'cDescription'=>'')); // this is displayed in the package overview after being installed, not on the actual dashboard pages
+            $sp = SinglePage::add('/dashboard/smooth_tag', $pkg);
+            $sp->update(array('cName'=>t('Smooth Tag'), 'cDescription'=>'Adds smooth scrolling to a href tag links on the same page')); // this is displayed in the package overview after being installed, and the cName is used for the single pages view as long as it has a view function
+        }
+        $sp = Page::getByPath('/dashboard/smooth_tag/settings');
+        if(!is_object($sp) || $sp->isError()) {
+            $sp = SinglePage::add('dashboard/smooth_tag/settings', $pkg);
+            $sp->update(array('cName'=>t('Smooth Tag Settings'), 'cDescription'=>''));
         }
 
     }
