@@ -1,5 +1,10 @@
 <?php  defined('C5_EXECUTE') or die("Access Denied."); ?>
-<form method="post" action="<?php echo $this->action('save_settings');?>">
+<script>
+$(document).ready(function(){
+	$(".smooth-tag-settings [type='checkbox']").bootstrapSwitch();
+});
+</script>
+<form class="smooth-tag-settings" method="post" action="<?php echo $this->action('save_settings');?>">
 
     <?php  echo $this->controller->token->output('save_settings'); ?>
 
@@ -9,7 +14,7 @@
             <div class="row">
                 <div class="col-xs-12 col-md-6">
                     <?php echo $form->label('enableSmoothTag', t('Enable Smooth Tag'))?>
-                    <?php echo $form->checkbox('enableSmoothTag', 1, $enableSmoothTag);?>
+                    <?php echo $form->checkbox('enableSmoothTag', 1, $enableSmoothTag, array('data-size' => 'small', 'data-on-color' => 'success', 'data-off-color' => 'danger'))?>
                 </div>
                 <div class="col-xs-12 col-md-6">
                 </div>

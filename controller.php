@@ -4,6 +4,9 @@ namespace Concrete\Package\SmoothTag;
 use Package;
 use Page;
 use \Concrete\Core\Page\Single as SinglePage;
+use AssetList;
+use \Concrete\Core\Asset\Asset;
+use Config;
 
 defined('C5_EXECUTE') or die(_("Access Denied."));
 
@@ -39,6 +42,7 @@ class Controller extends Package
             $sp->update(array('cName'=>t('Smooth Tag Settings'), 'cDescription'=>''));
         }
 
+        $pkg->getConfig()->save('archebian.smooth_tag.enabled', true); // enable plugin on install
     }
 
     public function on_start()
@@ -64,6 +68,15 @@ class Controller extends Package
             );
 
         }
+
+        //register bootstrap switch
+        $al = AssetList::getInstance();
+        $al->register('javascript', 'bootstrapswitch', 'vendor/bootstrap-switch/bootstrap-switch.min.js',
+                      array('version' => '3.3.2', 'position' => Asset::ASSET_POSITION_FOOTER, 'minify' => false, 'combine' => false), $this
+        );
+        $al->register('css', 'bootstrapswitch', 'vendor/bootstrap-switch/bootstrap-switch.min.css',
+                      array('version' => '3.3.2', 'position' => Asset::ASSET_POSITION_FOOTER, 'minify' => false, 'combine' => false), $this
+		    );
     }
 
 }

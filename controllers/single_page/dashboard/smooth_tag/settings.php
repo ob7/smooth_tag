@@ -12,6 +12,10 @@ class Settings extends DashboardPageController {
         $pkg = Package::getByHandle('smooth_tag');
         $enableSmoothTag = $pkg->getConfig()->get('archebian.smooth_tag.enabled');
         $this->set('enableSmoothTag', $enableSmoothTag);
+
+        // Assets for bootstrap checkbox as switch
+        $this->requireAsset('javascript','bootstrapswitch');
+        $this->requireAsset('css','bootstrapswitch');
     }
 
     public function updated()
@@ -25,7 +29,6 @@ class Settings extends DashboardPageController {
         if ($this->token->validate("save_settings")) {
             if ($this->isPost()) {
                 $enableSmoothTag = $this->post('enableSmoothTag') ? 1 : 0;
-                $textBox = $this->post('textBox');
                 $pkg = Package::getByHandle('smooth_tag');
                 $pkg->getConfig()->save('archebian.smooth_tag.enabled', $enableSmoothTag);
                 $this->redirect('/dashboard/smooth_tag/settings','updated');
