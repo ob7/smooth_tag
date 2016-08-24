@@ -26,7 +26,7 @@ class Settings extends DashboardPageController {
     {
         if ($this->token->validate("save_settings")) {
             if ($this->isPost()) {
-                $enableSmoothTag = $this->post('enableSmoothTag');
+                $enableSmoothTag = $this->post('enableSmoothTag') ? 1 : 0;
                 $textBox = $this->post('textBox');
                 $pkg = Package::getByHandle('smooth_tag');
                 $pkg->getConfig()->save('archebian.smooth_tag.enabled', $enableSmoothTag);
