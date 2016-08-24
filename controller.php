@@ -43,19 +43,25 @@ class Controller extends Package
 
     public function on_start() // code runs
     {
-        \Events::addListener(
-            'on_page_view',
-            function ($e) {
-                $html = \Loader::helper('html');
-                $page = $e->getPageObject();
+        $pkg = Package::getByHandle('smooth_tag');
+        $enableSmoothTag = $pkg->getConfig()->get('archebian.smooth_tag.enabled');
+        if($enableSmoothTag > 0) {
 
-                $systemPage = $page->isAdminArea(); //we dont want this enabled on admin pages
-                if(!$systemPage) {
-                    $v = \View::getInstance();
-                    $v->addFooterItem($html->javascript('smoothTag.js', $this->pkgHandle));
+            \Events::addListener(
+                'on_page_view',
+                function ($e) {
+                    $html = \Loader::helper('html');
+                    $page = $e->getPageObject();
+
+                    $systemPage = $page->isAdminArea(); //we dont want this enabled on admin pages
+                    if(!$systemPage) {
+                        $v = \View::getInstance();
+                        $v->addFooterItem($html->javascript('smoothTag.js', $this->pkgHandle));
+                    }
                 }
-            }
-        );
+            );
+
+        }
     }
 
 }
