@@ -10,7 +10,6 @@
                 <div class="col-xs-12 col-md-6">
                     <?php echo $form->label('enableSmoothTag', t('Enable Smooth Tag'))?>
                     <?php echo $form->checkbox('enableSmoothTag', 1, $enableSmoothTag);?>
-                    <?php echo $form->text('textBox', $textBox);?>
                 </div>
                 <div class="col-xs-12 col-md-6">
                 </div>

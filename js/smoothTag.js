@@ -1,5 +1,4 @@
 $(function() {
-    console.log("SMOOTH TAG LOADED");
     $('a[href*=#]:not([href=#])').click(function() {
         if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname && this.hash.length > 2 ) {
             var target = $(this.hash);

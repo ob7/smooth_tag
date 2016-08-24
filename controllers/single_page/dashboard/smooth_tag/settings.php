@@ -11,14 +11,12 @@ class Settings extends DashboardPageController {
     {
         $pkg = Package::getByHandle('smooth_tag');
         $enableSmoothTag = $pkg->getConfig()->get('archebian.smooth_tag.enabled');
-        $textBox = $pkg->getConfig()->get('archebian.smooth_tag.text');
         $this->set('enableSmoothTag', $enableSmoothTag);
-        $this->set('textBox', $textBox);
     }
 
     public function updated()
     {
-        $this->set('message', t("Settings saved."));    
+        $this->set('message', t("Settings saved."));
         $this->view();
     }
 
@@ -30,7 +28,6 @@ class Settings extends DashboardPageController {
                 $textBox = $this->post('textBox');
                 $pkg = Package::getByHandle('smooth_tag');
                 $pkg->getConfig()->save('archebian.smooth_tag.enabled', $enableSmoothTag);
-                $pkg->getConfig()->save('archebian.smooth_tag.text', $textBox);
                 $this->redirect('/dashboard/smooth_tag/settings','updated');
             }
         } else {

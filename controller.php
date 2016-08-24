@@ -21,7 +21,7 @@ class Controller extends Package
 
     public function getPackageName()
     {
-        return t("Scroll Tag");
+        return t("Smooth Tag");
     }
 
     public function install()
