@@ -16,7 +16,7 @@ class Controller extends Package
 
     protected $pkgHandle = 'smooth_tag';
     protected $appVersionRequired = '5.7.1';
-    protected $pkgVersion = '0.1.2';
+    protected $pkgVersion = '0.1.4';
 
     public function getPackageDescription()
     {
@@ -70,10 +70,9 @@ class Controller extends Package
                         $pkg = Package::getByHandle('smooth_tag');
                         $includeSelectors = $pkg->getConfig()->get('archebian.smooth_tag.include');
                         $excludeSelectors = $pkg->getConfig()->get('archebian.smooth_tag.exclude');
-
                         echo "<div style=\"display: none\" class=\"smooth-tag-dom-variables\" data-smooth_tag_include=\"" . $includeSelectors . "\" data-smooth_tag_exclude=\"" . $excludeSelectors . "\">SMOOTH TAG LOADED</div>";
 
-                        //load javascript
+                        //load smoothTag javascript
                         $v = \View::getInstance();
                         $v->addFooterItem($html->javascript('smoothTag.js', $this->pkgHandle));
                     }
@@ -82,7 +81,7 @@ class Controller extends Package
 
         }
 
-        //register bootstrap switch
+        //register bootstrap switch used in single page form
         $al = AssetList::getInstance();
         $al->register('javascript', 'bootstrapswitch', 'vendor/bootstrap-switch/bootstrap-switch.min.js',
                       array('version' => '3.3.2', 'position' => Asset::ASSET_POSITION_FOOTER, 'minify' => false, 'combine' => false), $this
@@ -91,7 +90,7 @@ class Controller extends Package
                       array('version' => '3.3.2', 'position' => Asset::ASSET_POSITION_FOOTER, 'minify' => false, 'combine' => false), $this
 		    );
 
-        // bootstrap callout css
+        // bootstrap callout css used in single page form
         $al->register('css', 'bootstrapcallout', 'vendor/bootstrap-callout/bs-callout.css',
                       array('version' => '3.3.2', 'position' => Asset::ASSET_POSITION_FOOTER, 'minify' => true, 'combine' => false), $this
 		    );
