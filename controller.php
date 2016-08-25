@@ -7,6 +7,7 @@ use \Concrete\Core\Page\Single as SinglePage;
 use AssetList;
 use \Concrete\Core\Asset\Asset;
 use Config;
+use Core;
 
 defined('C5_EXECUTE') or die(_("Access Denied."));
 
@@ -43,6 +44,8 @@ class Controller extends Package
         }
 
         $pkg->getConfig()->save('archebian.smooth_tag.enabled', true); // enable plugin on install
+        $pkg->getConfig()->save('archebian.smooth_tag.include', '.HTMLBlock .enable-smooth-tag'); //set default include selectors
+        $pkg->getConfig()->save('archebian.smooth_tag.exclude', '.ccm-image-slider-container'); // set default exclude selectors
     }
 
     public function on_start()
@@ -56,7 +59,7 @@ class Controller extends Package
             \Events::addListener(
                 'on_page_view',
                 function ($e) {
-                    $html = \Loader::helper('html');
+                    $html = Core::make('helper/html');
                     $page = $e->getPageObject();
 
                     $systemPage = $page->isAdminArea();

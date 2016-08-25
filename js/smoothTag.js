@@ -1,6 +1,7 @@
 $(function() {
-    $('a[href*=#]:not([href=#])').click(function() {
-        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname && this.hash.length > 2 ) {
+    $('.selector').find('a[href*=#]:not([href=#])').click(function() {
+        console.log("has length is " + this.hash.length);
+        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname && this.hash.length > 1 ) {
             var target = $(this.hash);
             target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
             var ww = window.innerWidth
