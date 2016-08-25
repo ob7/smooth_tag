@@ -6,7 +6,7 @@ $(function() {
     var smoothTagExclude = $('.smooth-tag-dom-variables').data('smooth_tag_exclude').replace(/\s\s+/g, ' ').replace(/[ ,]+/g, ",");
 
     $(smoothTagInclude).not(smoothTagExclude).find('a[href*=#]:not([href=#])').click(function() {
-        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname && this.hash.length > 1 ) { //last argument filters empty hashes
+        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
             var target = $(this.hash);
             target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
             var ww = window.innerWidth
