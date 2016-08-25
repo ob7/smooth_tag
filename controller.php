@@ -44,14 +44,15 @@ class Controller extends Package
         }
 
         $pkg->getConfig()->save('archebian.smooth_tag.enabled', true); // enable plugin on install
-        $pkg->getConfig()->save('archebian.smooth_tag.include', '.HTMLBlock .enable-smooth-tag'); //set default include selectors
-        $pkg->getConfig()->save('archebian.smooth_tag.exclude', '.ccm-image-slider-container'); // set default exclude selectors
+        $pkg->getConfig()->save('archebian.smooth_tag.include', '.HTMLBlock .smooth-tag-include'); //set default include selectors
+        $pkg->getConfig()->save('archebian.smooth_tag.exclude', '.smooth-tag-exclude .ccm-image-slider-container'); // set default exclude selectors
     }
 
     public function on_start()
     {
         $pkg = Package::getByHandle('smooth_tag');
         $enableSmoothTag = $pkg->getConfig()->get('archebian.smooth_tag.enabled');
+
 
         //if smooth_tag is enabled from dashboard, inject smoothTag.js into all non-admin page footers
         if($enableSmoothTag > 0) {
@@ -64,6 +65,15 @@ class Controller extends Package
 
                     $systemPage = $page->isAdminArea();
                     if(!$systemPage) {
+
+                        //get selectors so we can print to dom and load into javascript
+                        $pkg = Package::getByHandle('smooth_tag');
+                        $includeSelectors = $pkg->getConfig()->get('archebian.smooth_tag.include');
+                        $excludeSelectors = $pkg->getConfig()->get('archebian.smooth_tag.exclude');
+
+                        echo "<div style=\"display: none\" class=\"smooth-tag-dom-variables\" data-smooth_tag_include=\"" . $includeSelectors . "\" data-smooth_tag_exclude=\"" . $excludeSelectors . "\">SMOOTH TAG LOADED</div>";
+
+                        //load javascript
                         $v = \View::getInstance();
                         $v->addFooterItem($html->javascript('smoothTag.js', $this->pkgHandle));
                     }
