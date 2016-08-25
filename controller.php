@@ -77,6 +77,11 @@ class Controller extends Package
         $al->register('css', 'bootstrapswitch', 'vendor/bootstrap-switch/bootstrap-switch.min.css',
                       array('version' => '3.3.2', 'position' => Asset::ASSET_POSITION_FOOTER, 'minify' => false, 'combine' => false), $this
 		    );
+
+        // bootstrap callout css
+        $al->register('css', 'bootstrapcallout', 'vendor/bootstrap-callout/bs-callout.css',
+                      array('version' => '3.3.2', 'position' => Asset::ASSET_POSITION_FOOTER, 'minify' => true, 'combine' => false), $this
+		    );
     }
 
 }

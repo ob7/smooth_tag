@@ -16,6 +16,7 @@ class Settings extends DashboardPageController {
         // Assets for bootstrap checkbox as switch
         $this->requireAsset('javascript','bootstrapswitch');
         $this->requireAsset('css','bootstrapswitch');
+        $this->requireAsset('css','bootstrapcallout');
     }
 
     public function updated()
