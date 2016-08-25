@@ -16,7 +16,7 @@ class Controller extends Package
 
     protected $pkgHandle = 'smooth_tag';
     protected $appVersionRequired = '5.7.1';
-    protected $pkgVersion = '0.1.4';
+    protected $pkgVersion = '0.1.5';
 
     public function getPackageDescription()
     {
