@@ -19,7 +19,7 @@ class Settings extends DashboardPageController {
         $excludeSelectors = $pkg->getConfig()->get('archebian.smooth_tag.exclude');
         $this->set('exclude', $excludeSelectors);
 
-        //Get included selecors
+        //Get included selectors
         $includeSelectors = $pkg->getConfig()->get('archebian.smooth_tag.include');
         $this->set('include', $includeSelectors);
 
