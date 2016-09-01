@@ -1,5 +1,4 @@
 <?php
-
 namespace Concrete\Package\SmoothTag;
 use Package;
 use Page;
@@ -33,14 +32,14 @@ class Controller extends Package
         $pkg = parent::install();
 
         // create dashboard pages
-        $sp = Page::getByPath('/dashboard/smooth_tag');
+        $sp = Page::getByPath('/dashboard/smoothtag');
         if(!is_object($sp) || $sp->isError()) {
-            $sp = SinglePage::add('/dashboard/smooth_tag', $pkg);
+            $sp = SinglePage::add('/dashboard/smoothtag', $pkg);
             $sp->update(array('cName'=>$this->getPackageName(), 'cDescription'=>$this->getPackageDescription()));
         }
-        $sp = Page::getByPath('/dashboard/smooth_tag/settings');
+        $sp = Page::getByPath('/dashboard/smoothtag/settings');
         if(!is_object($sp) || $sp->isError()) {
-            $sp = SinglePage::add('dashboard/smooth_tag/settings', $pkg);
+            $sp = SinglePage::add('dashboard/smoothtag/settings', $pkg);
             $sp->update(array('cName'=>$this->getPackageName() . t(' Settings'), 'cDescription'=>''));
         }
         SmoothTagConfig::setConfig(); // installs default configuration
@@ -48,30 +47,29 @@ class Controller extends Package
 
     public function on_start()
     {
-
         Route::register( // for returning config to javascript
             '/package/smoothtag/controller/config',
             'Concrete\Package\SmoothTag\Controller\config::get'
         );
 
-        // check if plugin is enabled
-        $pkg = Package::getByHandle('smooth_tag');
-        $enableSmoothTag = $pkg->getConfig()->get('archebian.smoothtag.enabled');
-        // check for admin page
-        $page = $e->getPageObject();
-        $systemPage = $page->isAdminArea();
-
-        if($enableSmoothTag > 0 && !$systemPage) { // if not admin page and enabled
-            \Events::addListener(
-                'on_page_view',
-                //load smooth tag javascript onto current page
-                function ($e) {
+        \Events::addListener(
+            'on_page_view',
+            //load smooth tag javascript onto current page
+            function ($e) {
+                $page = $e->getPageObject(); // get current page object
+                // check if plugin is enabled
+                $pkg = Package::getByHandle('smooth_tag'); //get handle
+                $enabled = $pkg->getConfig()->get('archebian.smoothtag.enabled'); // check enabled value
+                // check for admin page
+                console.log(`enabled is ${enabled}`);
+                $systemPage = $page->isAdminArea();
+                if($enabled > 0 && !$systemPage) { // if plugin enabled and not an admin page
                     $html = Core::make('helper/html'); //for adding footer items
                     $v = \View::getInstance(); //for targeting current page
                     $v->addFooterItem($html->javascript('smoothTag.js', $this->pkgHandle));
                 }
-            );
-        }
+            }
+        );
     }
 
 }

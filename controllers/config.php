@@ -11,6 +11,6 @@ class Config extends Controller {
     {
         $config = SmoothTagConfig::loadConfig();
         $ajax = Core::make('helper/ajax');
-        $ajax->sendResults($config);
+        $ajax->sendResult($config);
     }
 }

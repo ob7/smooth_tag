@@ -16,7 +16,7 @@ class SmoothTagConfig {
             $pkg->getConfig()->save('archebian.smoothtag.'.$item, $value);
         }
     }
-    public function loadConfig() // used to load saved configuration
+    public function loadConfig() // used to load saved configuration by settings page and json route
     {
         $config = SmoothTagConfig::getKeys();
         $pkg = SmoothTagConfig::packageHandle();
@@ -27,7 +27,7 @@ class SmoothTagConfig {
         }
         return $settings;
     }
-    public function getKeys() //used to get available config items based on default keys
+    public function getKeys() //used to get available config keys based on 'defaults' keys
     {
         $config = SmoothTagConfig::defaults();
         $keys = array();
