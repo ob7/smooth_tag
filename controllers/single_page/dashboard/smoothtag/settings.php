@@ -28,14 +28,9 @@ class Settings extends DashboardPageController {
         $al->register('css', 'bootstrapswitch', 'vendor/bootstrap-switch/bootstrap-switch.min.css',
                       array('version' => '3.3.2', 'position' => Asset::ASSET_POSITION_FOOTER, 'minify' => false, 'combine' => false), $pkg
 		    );
-        // register bootstrap callout css used in single page form
-        $al->register('css', 'bootstrapcallout', 'vendor/bootstrap-callout/bs-callout.css',
-                      array('version' => '3.3.2', 'position' => Asset::ASSET_POSITION_FOOTER, 'minify' => true, 'combine' => false), $pkg
-		    );
         // Now require these assets
         $this->requireAsset('javascript','bootstrapswitch');
         $this->requireAsset('css','bootstrapswitch');
-        $this->requireAsset('css','bootstrapcallout');
     }
 
     public function updated()
@@ -54,6 +49,9 @@ class Settings extends DashboardPageController {
                     $post = $this->post($key);
                     if ($key == 'exclude' && $post == "") { // javascript fails if exclude is empty, so we set it to the default if thats the case
                         $post = '.smooth-tag-exclude';
+                    }
+                    if ($key == 'include' && $post == "") { // javascript fails if exclude is empty, so we set it to the default if thats the case
+                        $post = 'body';
                     }
                     $pkg->getConfig()->save('archebian.smoothtag.'.$key, $post);
                 }

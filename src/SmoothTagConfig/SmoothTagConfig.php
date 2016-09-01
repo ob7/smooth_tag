@@ -40,7 +40,7 @@ class SmoothTagConfig {
     {
         return array(
             'enabled' => true,
-            'include' => '.HTMLBlock .smooth-tag-include',
+            'include' => 'body .smooth-tag-include',
             'exclude' => '.ccm-image-slider-container .smooth-tag-exclude'
         );
     }
