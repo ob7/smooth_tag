@@ -14,12 +14,12 @@ class Controller extends Package
 {
 
     protected $pkgHandle = 'smooth_tag';
-    protected $appVersionRequired = '5.7.1';
-    protected $pkgVersion = '0.9';
+    protected $appVersionRequired = '5.7.5.1';
+    protected $pkgVersion = '0.9.1';
 
     public function getPackageDescription()
     {
-        return t("Adds a smooth scrolling effect to anchor tags within a page");
+        return t("Adds a smooth scrolling effect to anchor links on a page");
     }
 
     public function getPackageName()
