@@ -2,7 +2,7 @@ $(function() {
     var config = {}; // create config object to pass json results to
     $.ajax({
         dataType: "json", //return this ajax call as json object
-        url: `${CCM_APPLICATION_URL}/index.php/package/smoothtag/controller/config`,
+        url: CCM_APPLICATION_URL + '/index.php/package/smoothtag/controller/config',
         success: function(result) {
             $.each(result, function(key,value) {
                 config[key] = value; 
